@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이민정 개인페이지</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Poor+Story&display=swap');
+
+        * {
+            font-family: "Gowun Dodum", serif;
+        }
+
+        body {
+            background-image: url('https://i.ibb.co/YLhN8Hy/background-MJ.jpg');
+            background-color: rgba(255, 255, 255, 0.3);
+            background-size: cover;
+        }
+
+        .main {
+            width: 1000px;
+            margin: 60px auto auto auto;
+        }
+        .main-bottom{
+            margin: 20px auto 0px auto;
+        }
+        
+
+        .goodbtn {
+            background-color: transparent;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 15px;
+            border: none;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .goodbtn:hover {
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .urlcard {
+            width: 1000px;
+            margin: auto auto 30px auto;
+
+        }
+
+        .urlcard .card {
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .urlcard .card:hover {
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .urlcard .card-img-top {
+            width: 80%;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .changebtn {
+            background-color: transparent;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 25px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .changebtn:hover {
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .image-container {
+            width: 332px;
+            height: 496px;
+            overflow: hidden;
+        }
+
+        .card-text small {
+            font-size: 14px;
+            color: #6c757d;
+            font-weight: bold;
+        }
+        
+    </style>
+    <script>
+        let images = ["https://i.ibb.co/6mjzh5K/mj.jpg", "https://i.ibb.co/FqgtwcZ/reach.jpg", "https://i.ibb.co/BysPM7L/lucky.jpg"];
+        let i = 0; //변수 초기화
+        function change() {
+            i++;
+            if (i >= images.length) {
+                i = 0;
+            }
+            //console.log(images[i]);
+            let picture = document.getElementById("picture");
+            picture.src = images[i];
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div class="main">
+        <div class="header-container" style="display: flex; align-items: center; justify-content: space-between;">
+            <h1 style="font-family: 'Lora', serif;">ABOUT ME</h1>
+        </div>
+
+        <div class="card mb-3" style="max-width: 1000px;">
+            <div class="row g-0">
+                <div class="col-md-4 image-container">
+                    <img src="https://i.ibb.co/6mjzh5K/mj.jpg" class="img-fluid rounded-start" alt="사진 로딩 중.." id="picture"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body" style="height: 496px;">
+                        <h2 class="card-title">이민정</h2>
+                        <div class="content">
+                            <h5 class="card-text"><br>안녕하세요, 현재 25년도 2월 졸업을 앞두고 있는 이민정입니다.<br></h5>
+                            <h5 class="card-text">저는 부드러운 리더쉽과 불타는 열정을 가지고 있습니다.<br></h5>
+                            <h5 class="card-text"><br>다같이 열심히 공부해서 좋은 결과 있었으면 좋겠습니다!🙌</h5>
+                            <h5 class="card-text"><br><br>🖥️ 전공 : 인공지능 관련 전공 </h5>
+                            <h5 class="card-text"><br>🪄 mbti : ISTJ </h5>
+                            <h5 class="card-text"><br>⚾ 취미 : 야구보기 <br><br></h5>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between;" class="main-bottom">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <button onclick="change()" class="changebtn">📸</button>
+                                <p class="card-text" ><small class="text-body-secondary">=> 버튼을 눌러서
+                                        사진을 넘겨보세요!</small></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="urlcard" style="display: flex; gap: 50px; justify-content: center;">
+        <div class="card" style="width: 300px;" onclick="window.open('https://velog.io/@minjonyyy')" type="button">
+            <img src="https://i.namu.wiki/i/0wHXrWzivVQe5WTKnKtuBqd6ipp-IA2w_ovFOXeZdU2BL181Kfunf1GNgU_9juIfS-0EtsJlbk9ruNk6dW45e5tFCmFQNBPyKfUtl3AqufZnjDrlx9aAi9p54tI7hL1IJXU7Jwwkc99ICwjmgVcrjw.svg"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BLOG</h5>
+
+            </div>
+        </div>
+        <div class="card" style="width: 300px;" onclick="window.open('https://github.com/minjonyyy')" type="button">
+            <img src="https://i.namu.wiki/i/HDQjvREG3Qd1ODLLjhd-d6Wj4OqWPndUDJ9L_Ign0f3RZ3NT4bqY-eg3mYq3-ZdpSspPy4XDXyyjTStuz_2qqe_-zLqCj4U5_qKQt3tsobV4XCSgn2qIwUy8VBBnSEdXQxPJyMYBiDJEqMZAw43ePA.svg"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">GITHUB</h5>
+
+            </div>
+        </div>
+        <div class="card" style="width: 300px;" onclick="window.open('https://www.instagram.com/lucky_rich_bff')"
+            type="button">
+            <img src="https://i.namu.wiki/i/I-w7Dools7qEjA_oK2k_Kv_uHLjKouKL7eK05c7WM7VHVmnjtu0V2n1s70Vs3HU4hrUm7g6BWkhgfMQk7NAWRyP2Q8sTeF7fk95rKdEpyveKy9gJWCW4Qob5m--goZGYqxGSXIFvMXdrtlQkDH3ZKw.svg"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">INSTAGRAM</h5>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
