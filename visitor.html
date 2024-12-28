@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .visitor {
+            width: 800px;
+            margin: 50px auto auto auto;
+        }
+
+        .container {
+            margin: 30px auto auto auto;
+        }
+
+        .main-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 50px auto auto auto;
+        }
+
+        .openclosebtn {
+            width: 250px;
+            height: 50px;
+            color: white;
+            font-size: 25px;
+            border: none;
+            border-radius: 5%;
+            background-color: black;
+            opacity: 0.3;
+        }
+    </style>
+    <script type="module">
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+
+        // Firebase 구성 정보 설정
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCv9XNcqH-RiesaXlvZres-kLpvkadUnSE",
+            authDomain: "sparta-b58a1.firebaseapp.com",
+            projectId: "sparta-b58a1",
+            storageBucket: "sparta-b58a1.firebasestorage.app",
+            messagingSenderId: "473608853951",
+            appId: "1:473608853951:web:aef2ac877c201dbd56290a",
+            measurementId: "G-5ZM3WYY0L1"
+        };
+
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        $("#savebtn").click(async function () {
+            let emoji = $('#emoji').val()
+            let nickname = $('#nickname').val()
+            let comment = $('#comment').val()
+
+            let doc = {
+                'emoji': emoji,
+                'nickname': nickname,
+                'comment': comment
+            };
+            await addDoc(collection(db, "visitor"), doc);
+            alert('방명록이 저장되었습니다 :)');
+            window.location.reload();
+        })
+
+
+        $("#openclosebtn").click(async function () {
+            $('#visitormemo').toggle();
+        })
+
+        let docs = await getDocs(collection(db, "visitor"));
+        docs.forEach((doc) => {
+            let row = doc.data();
+
+            let emoji = row['emoji'];
+            let nickname = row['nickname'];
+            let comment = row['comment'];
+
+            let temp_html = `
+            <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header">${emoji}</div>
+                <div class="card-body">
+                    <h5 class="card-title">${nickname}</h5>
+                    <p class="card-text">${comment}</p>
+                </div>
+            </div>`;
+            $('#card').append(temp_html);
+        });
+
+    </script>
+</head>
+
+<body>
+    <div class="main-top">
+        <button class="openclosebtn" id="openclosebtn" type="button">방명록</button>
+    </div>
+
+    <div class="visitor" id="visitormemo">
+
+        <form class="row g-3 align-items-center">
+            <div class="col-4" sytle="width:100px">
+                <select class="form-select" id="emoji">
+                    <option selected>이모지 선택</option>
+                    <option value="😀">😀</option>
+                    <option value="😊">😊</option>
+                    <option value="😎">😎</option>
+                    <option value="👍">👍</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <span class="input-group-text">💬</span>
+                    <input type="text" class="form-control" id="nickname" placeholder="닉네임을 입력해주세요.">
+                </div>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-primary w-100" id="savebtn">저장하기</button>
+            </div>
+            <div class="col-12">
+                <div class="input-group">
+                    <span class="input-group-text">💬</span>
+                    <input type="text" class="form-control" id="comment" placeholder="내용을 입력해주세요. (최대 20자)">
+                </div>
+            </div>
+        </form>
+
+        <div class="container">
+            <div id="card" class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-header">😀</div>
+                    <div class="card-body">
+                        <h5 class="card-title">럭키</h5>
+                        <p class="card-text">잘 보고 갑니다!</p>
+                    </div>
+                </div>
+                <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-header">😊</div>
+                    <div class="card-body">
+                        <h5 class="card-title">리치</h5>
+                        <p class="card-text">정말 잘 만드셨네요!!! 저도 따라하고 싶어요</p>
+                    </div>
+                </div>
+                <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-header">😎</div>
+                    <div class="card-body">
+                        <h5 class="card-title">냐미</h5>
+                        <p class="card-text">19조 화이팅!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
